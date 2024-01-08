@@ -21,11 +21,11 @@ class Application(Frame):
         self.l2.grid(row=1)
         self.l3.grid(row=2)
         
-        self.eFrame = Entry(self.master, width=40)
+        self.eFname = Entry(self.master, width=40)
         self.eX = Entry(self.master, width=40)
         self.eY = Entry(self.master, width=40)
         
-        self.eFrame.grid(row=0, column=1, sticky=W)
+        self.eFname.grid(row=0, column=1, sticky=W)
         self.eX.grid(row=1, column=1, sticky=W)
         self.eY.grid(row=2, column=1, sticky=W)
         
@@ -42,16 +42,29 @@ class Application(Frame):
                        )
         
         self.btn = Button(self.master, text="Show Regression Graph", style="D.TButton")
+        self.btn["command"] = self.show_graph
         self.btn.grid(row=4, column=0, sticky=W)
         
         self.stats = Button(self.master, text="Show Stats",
                             style="D.TButton")
+        self.stats["command"] = self.show_stats
         self.stats.grid(row=4, column=1, sticky=W)
         
         self.quit = Button(self.master, text="Quit",
                            style="D.TButton", command=self.master.destroy)
         self.quit.grid(row=4, column=1, sticky=E)
         
+    def show_graph(self):
+        # print("eX Value")
+        # print(self.eFname.get())
+        # print(self.eX.get())
+        regression_plot(self.eFname.get(), self.eX.get(), self.eY.get())
+    
+    def show_stats(self):
+        xstats, ystats = stats_columns(self.eFname.get(), self.eX.get(), self.eY.get())
+        self.txtX.insert(INSERT, xstats)
+        self.txtY.insert(INSERT, ystats)
+            
         
         
 
