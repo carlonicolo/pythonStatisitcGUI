@@ -1,1 +1,1 @@
-# pythonStatisitcGUI
+# Python GUI with Tkinter
